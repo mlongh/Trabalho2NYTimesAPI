@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const searchForm = document.getElementById('search-form');
     const sectionInput = document.getElementById('section'); // Input para selecionar a seção
     const defaultSection = 'home'; // Seção padrão
 
@@ -7,10 +6,12 @@ document.addEventListener('DOMContentLoaded', () => {
     function loadArticles(section) {
         // Remova os artigos existentes da lista
         const newsList = document.getElementById('news-list');
-        newsList.innerHTML = ''; // Limpa a lista
+        newsList.innerHTML = ''; 
+        newsList.style.display = 'flex';
+        newsList.style.justifyContent = 'space-between';
+        newsList.style.gap = '16px';
 
-        // Substitua 'YOUR_API_KEY' pela sua chave de API real do New York Times.
-        const apiKey = '';
+        const apiKey = 'uRghgnaYdfoAEjIEiuyLXUJkUuV6IWim';
         const apiUrl = `https://api.nytimes.com/svc/topstories/v2/${section}.json?api-key=${apiKey}`;
 
         // Obtenha dados da API do New York Times
@@ -22,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 data.results.forEach(article => {
                     const articleCard = document.createElement('div');
                     articleCard.className = 'col-md-4 mb-4 card';
-                    articleCard.style.width = '18rem';
+                    articleCard.style.width = '22rem';
                     articleCard.style.padding = '4px';
                     articleCard.style.margin = '8px';
 
@@ -37,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const articleTitle = document.createElement('h4');
                     articleTitle.textContent = article.title;
                     articleTitle.className = 'card-title';
+                    articleTitle.style.padding = '8px';
 
                     const articleDescription = document.createElement('div');
                     articleDescription.textContent = article.abstract;
@@ -45,7 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     const articleLink = document.createElement('a');
                     articleLink.href = article.url;
                     articleLink.textContent = 'Read More';
-                    articleLink.className = 'btn btn-primary';
+                    articleLink.className = 'btn btn-dark';
+                    articleLink.setAttribute('target', '_blank');
 
                     articleCard.appendChild(articleImage);
                     articleCard.appendChild(articleTitle);
